@@ -1,0 +1,8 @@
+{
+  "entryPoints": ["./src/*"],
+  "out": "docs/Web Server/",
+  "readme": "README.md",
+  "name": "twitchapi doc",
+  "tsconfig": "./tsconfig.json",
+  "githubPages" : false
+}

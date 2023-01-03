@@ -1,0 +1,30 @@
+{
+  "name": "twitchapi.js",
+  "version": "1.0.12",
+  "devDependencies": {
+    "typedoc": "^0.23.23",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@types/ws": "^8.5.4",
+    "axios": "^1.2.2",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.5.4",
+    "ws": "^8.11.0"
+  },
+  "scripts": {
+    "build": "tsc -w",
+    "doc": "typedoc src/twitchapi.ts src/events.ts src/sockets/* src/sockets/eventsub/subscriptions/* src/utils/* --out ../documentation",
+    "pushnpm": "npm publish --access=public",
+    "test": "tsc"
+  },
+  "outDir": "build",
+  "main": "build/twitchapi.js",
+  "types": "build/twitchapi.d.ts",
+  "type": "commonjs",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
