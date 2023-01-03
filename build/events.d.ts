@@ -8,6 +8,7 @@ import { ChannelSubscribe } from "./sockets/eventsub/subscriptions/channelSubscr
 import { ChannelFollow } from "./sockets/eventsub/subscriptions/channelFollow";
 import { ChannelUpdate } from "./sockets/eventsub/subscriptions/channelUpdate";
 import { CustomRewardRedemption } from "./sockets/eventsub/subscriptions/customRewardRedemption";
+import { ChannelSubscriptionMessage } from "./sockets/eventsub/subscriptions/channelSubscriptionMessage";
 export declare interface events {
     "channel.channel_points_custom_reward_redemption.add": CustomRewardRedemption;
     "open": any;
@@ -16,4 +17,5 @@ export declare interface events {
     "channel.subscribe": ChannelSubscribe;
     "channel.subscription.end": ChannelSubscriptionEnd;
     "channel.subscription.gift": ChannelSubscriptionGift;
+    "channel.subscription.message": ChannelSubscriptionMessage;
 }
