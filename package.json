@@ -21,11 +21,11 @@
     "build": "tsc -w",
     "doc": "typedoc src/twitchapi.ts src/events.ts src/sockets/* src/sockets/eventsub/subscriptions/* src/utils/* --out ../documentation",
     "pushnpm": "npm publish --access=public",
-    "test": "tsc"
+    "types": "tsc --declaration --allowJs --emitDeclarationOnly --outDir types"
   },
   "outDir": "build",
   "main": "build/twitchapi.js",
-  "types": "build/twitchapi.d.ts",
+  "types": "types/twitchapi.d.ts",
   "type": "commonjs",
   "keywords": [],
   "author": "",
