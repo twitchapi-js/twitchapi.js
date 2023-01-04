@@ -3,7 +3,6 @@
  * @see https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types for more info
  */
 export enum Intents {
-
     ChanneUpdate = "channel.update",
     ChannelFollow = "channel.follow",
     ChannelSubscribe = "channel.subscribe",

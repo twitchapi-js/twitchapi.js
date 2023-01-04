@@ -49,6 +49,7 @@ var SocketManager = /** @class */ (function () {
         this.clientId = props.clientId;
         this.userId = props.userId;
         this.intents = props.intents;
+        this.twitchApi = props.twitchapi;
     }
     /**
      * @private

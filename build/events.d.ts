@@ -2,7 +2,8 @@
  * list of the all event with twitch
  * @interface event
  */
-export declare interface events {
+import { ChatManager } from "./sockets/chat/chatManager";
+export interface events {
     "channel.channel_points_custom_reward_redemption.add": any;
     "open": any;
     "channel.update": any;
@@ -41,4 +42,5 @@ export declare interface events {
     "user.authorization.grant": any;
     "user.authorization.revoke": any;
     "user.update": any;
+    "on.message": ChatManager;
 }

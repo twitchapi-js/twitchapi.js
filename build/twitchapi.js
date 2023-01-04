@@ -50,11 +50,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.twitchapi = void 0;
 var node_events_1 = require("node:events");
 var ws_1 = require("ws");
 var socketManager_1 = require("./sockets/socketManager");
+var websocket_1 = __importDefault(require("websocket"));
+var chatManager_1 = require("./sockets/chat/chatManager");
 var client = new ws_1.WebSocket("wss://eventsub-beta.wss.twitch.tv/ws");
 var twitchapi = /** @class */ (function (_super) {
     __extends(twitchapi, _super);
@@ -63,8 +68,9 @@ var twitchapi = /** @class */ (function (_super) {
      * @param props
      */
     function twitchapi(props) {
-        var _this = _super.call(this, props) || this;
+        var _this = _super.call(this) || this;
         _this.intents = props.intents;
+        _this.chatbot = props.chatbot;
         return _this;
     }
     /**
@@ -82,7 +88,14 @@ var twitchapi = /** @class */ (function (_super) {
                 parseData = JSON.parse(data.toString());
                 if (parseData.metadata.message_type === "session_welcome") {
                     this.sessionId = parseData.payload.session.id;
-                    socketManager = new socketManager_1.SocketManager({ intents: this.intents, token: option.token, clientId: option.clientId, userId: option.userId, sessionId: this.sessionId });
+                    socketManager = new socketManager_1.SocketManager({
+                        intents: this.intents,
+                        token: option.token,
+                        clientId: option.clientId,
+                        userId: option.userId,
+                        sessionId: this.sessionId,
+                        twitchapi: this,
+                    });
                     socketManager.connectToEvents().then(function () {
                         console.log("Connect into server");
                     });
@@ -93,6 +106,20 @@ var twitchapi = /** @class */ (function (_super) {
                 return [2 /*return*/];
             });
         }); });
+        if (this.chatbot) {
+            this.connectIntoChat(option.token);
+        }
+    };
+    twitchapi.prototype.connectIntoChat = function (token) {
+        this.chatClient = new websocket_1.default.client();
+        this.chatClient.on("connect", function (connection) {
+            connection.sendUTF('CAP REQ :twitch.tv/membership twitch.tv/tags twitch.tv/commands');
+            connection.sendUTF('PASS oauth:' + token);
+            connection.sendUTF('NICK royaljacquess');
+            connection.sendUTF('JOIN #royaljacquess');
+            var chat = new chatManager_1.ChatManager();
+        });
+        this.chatClient.connect("ws://irc-ws.chat.twitch.tv:80");
     };
     return twitchapi;
 }(node_events_1.EventEmitter));

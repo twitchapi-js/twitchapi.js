@@ -8,11 +8,17 @@ export declare interface twitchapi {
 export declare class twitchapi extends EventEmitter {
     sessionId: any;
     intents: any;
+    chatClient: any;
+    QauthToken: any;
+    chatbot: any;
     /**
      *
      * @param props
      */
-    constructor(props: any);
+    constructor(props: {
+        intents: Array<any>;
+        chatbot: boolean;
+    });
     /**
      * create connection into twitch using your token
      * @param option
@@ -22,4 +28,5 @@ export declare class twitchapi extends EventEmitter {
         clientId: string;
         userId: string;
     }): void;
+    connectIntoChat(token: string): void;
 }
