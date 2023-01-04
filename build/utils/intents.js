@@ -6,12 +6,12 @@ exports.Intents = void 0;
  */
 var Intents;
 (function (Intents) {
-    Intents[Intents["CustomRewardRedemptionAdd"] = 0] = "CustomRewardRedemptionAdd";
-    Intents[Intents["ChanneUpdate"] = 1] = "ChanneUpdate";
-    Intents[Intents["ChannelFollow"] = 2] = "ChannelFollow";
-    Intents[Intents["ChannelSubscribe"] = 3] = "ChannelSubscribe";
-    Intents[Intents["channelSubscriptionEnd"] = 4] = "channelSubscriptionEnd";
-    Intents[Intents["channelSubscriptionGift"] = 5] = "channelSubscriptionGift";
-    Intents[Intents["channelSubscriptionMessage"] = 6] = "channelSubscriptionMessage";
+    Intents["CustomRewardRedemptionAdd"] = "channel.channel_points_custom_reward_redemption.add";
+    Intents["ChanneUpdate"] = "channel.update";
+    Intents["ChannelFollow"] = "channel.follow";
+    Intents["ChannelSubscribe"] = "channel.subscribe";
+    Intents["channelSubscriptionEnd"] = "channel.subscription.end";
+    Intents["channelSubscriptionGift"] = "channel.subscription.gift";
+    Intents["channelSubscriptionMessage"] = "channel.subscription.message";
 })(Intents = exports.Intents || (exports.Intents = {}));
 //# sourceMappingURL=intents.js.map

@@ -19,5 +19,5 @@ export declare class SocketManager {
      * @private
      * connect into event by socket
      */
-    connectToEvents(): void;
+    connectToEvents(): Promise<void>;
 }

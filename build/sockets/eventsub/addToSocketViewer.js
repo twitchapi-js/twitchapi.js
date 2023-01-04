@@ -50,51 +50,56 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.twitchapi = void 0;
-var node_events_1 = require("node:events");
-var ws_1 = require("ws");
-var socketManager_1 = require("./sockets/socketManager");
-var client = new ws_1.WebSocket("wss://eventsub-beta.wss.twitch.tv/ws");
-var twitchapi = /** @class */ (function (_super) {
-    __extends(twitchapi, _super);
-    /**
-     *
-     * @param props
-     */
-    function twitchapi(props) {
-        var _this = _super.call(this, props) || this;
-        _this.intents = props.intents;
-        return _this;
+exports.AddToSocketViewer = void 0;
+var baseSocket_1 = require("./baseSocket");
+var axios_1 = __importDefault(require("axios"));
+var AddToSocketViewer = /** @class */ (function (_super) {
+    __extends(AddToSocketViewer, _super);
+    function AddToSocketViewer() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    /**
-     * create connection into twitch using your token
-     * @param option
-     */
-    twitchapi.prototype.login = function (option) {
-        var _this = this;
-        client.on("open", function (open) {
-            _this.emit("open", open);
-        });
-        client.on("message", function (data) { return __awaiter(_this, void 0, void 0, function () {
-            var parseData, socketManager;
+    AddToSocketViewer.prototype.connectIntoSocket = function (intent) {
+        return __awaiter(this, void 0, void 0, function () {
+            var e_1;
             return __generator(this, function (_a) {
-                parseData = JSON.parse(data.toString());
-                if (parseData.metadata.message_type === "session_welcome") {
-                    this.sessionId = parseData.payload.session.id;
-                    socketManager = new socketManager_1.SocketManager({ intents: this.intents, token: option.token, clientId: option.clientId, userId: option.userId, sessionId: this.sessionId });
-                    socketManager.connectToEvents().then(function () {
-                        console.log("Connect into server");
-                    });
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log("add " + intent + "websocket");
+                        return [4 /*yield*/, axios_1.default.post("https://api.twitch.tv/helix/eventsub/subscriptions", {
+                                type: intent,
+                                version: 1,
+                                transport: {
+                                    method: "websocket",
+                                    session_id: this.sessionId
+                                },
+                                condition: {
+                                    broadcaster_user_id: this.userId
+                                },
+                                session_id: this.sessionId
+                            }, {
+                                headers: {
+                                    Authorization: "Bearer " + this.token,
+                                    "Client-Id": this.clientId
+                                }
+                            })];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_1 = _a.sent();
+                        console.log(e_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
-                else {
-                    this.emit(parseData.metadata.subscription_type, parseData);
-                }
-                return [2 /*return*/];
             });
-        }); });
+        });
     };
-    return twitchapi;
-}(node_events_1.EventEmitter));
-exports.twitchapi = twitchapi;
-//# sourceMappingURL=twitchapi.js.map
+    return AddToSocketViewer;
+}(baseSocket_1.BaseSocket));
+exports.AddToSocketViewer = AddToSocketViewer;
+//# sourceMappingURL=addToSocketViewer.js.map

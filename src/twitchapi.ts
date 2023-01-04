@@ -37,7 +37,9 @@ export class twitchapi extends EventEmitter{
             if (parseData.metadata.message_type === "session_welcome") {
                 this.sessionId = parseData.payload.session.id;
                 let socketManager = new SocketManager({intents: this.intents, token: option.token, clientId: option.clientId, userId: option.userId, sessionId: this.sessionId})
-                socketManager.connectToEvents();
+                socketManager.connectToEvents().then(() => {
+                    console.log("Connect into server")
+                });
             }else {
                 this.emit(parseData.metadata.subscription_type, parseData);
             }
