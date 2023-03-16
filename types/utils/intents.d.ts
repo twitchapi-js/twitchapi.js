@@ -1,0 +1,43 @@
+/**
+ * list of the custom intents for activate read specific channels
+ * @see https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types for more info
+ */
+export declare enum Intents {
+    ChanneUpdate = "channel.update",
+    ChannelFollow = "channel.follow",
+    ChannelSubscribe = "channel.subscribe",
+    channelSubscriptionEnd = "channel.subscription.end",
+    channelSubscriptionGift = "channel.subscription.gift",
+    channelSubscriptionMessage = "channel.subscription.message",
+    channelCheer = "channel.cheer",
+    channelRaid = "channel.raid",
+    channelBan = "channel.ban",
+    channelUnban = "channel.unban",
+    channelModeratorAdd = "channel.moderator.add",
+    channelModeratorRemove = "channel.moderator.remove",
+    channelChannelPointsCustomRewardAdd = "channel.channel_points_custom_reward.add",
+    channelChannelPointsCustomRewardUpdate = "channel.channel_points_custom_reward.update",
+    channelChannelPointsCustomRewardRemove = "channel.channel_points_custom_reward.remove",
+    channelChannelPointsCustomRewardRedemptionAdd = "channel.channel_points_custom_reward_redemption.add",
+    channelChannelPointsCustomRewardRedemptionUpdate = "channel.channel_points_custom_reward_redemption.update",
+    channelPollBegin = "channel.poll.begin",
+    channelPollProgress = "channel.poll.progress",
+    channelPollEnd = "channel.poll.end",
+    channelPredictionBegin = "channel.prediction.begin",
+    channelPredictionProgress = "channel.prediction.progress",
+    channelPredictionLock = "channel.prediction.lock",
+    channelPredictionEnd = "channel.prediction.end",
+    dropEntitlementGrant = "drop.entitlement.grant",
+    extensionBitsTransactionCreate = "extension.bits_transaction.create",
+    channelGoalBegin = "channel.goal.begin",
+    channelGoalProgress = "channel.goal.progress",
+    channelGoalEnd = "channel.goal.end",
+    channelHypeTrainBegin = "channel.hype_train.begin",
+    channelHypeTrainProgress = "channel.hype_train.progress",
+    channelHypeTrainEnd = "channel.hype_train.end",
+    streamOnline = "stream.online",
+    streamOffline = "stream.offline",
+    userAuthorizationGrant = "user.authorization.grant",
+    userAuthorizationrevoke = "user.authorization.revoke",
+    userUpdate = "user.update"
+}

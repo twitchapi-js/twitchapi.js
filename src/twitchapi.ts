@@ -3,13 +3,17 @@ import {events} from "./events";
 import {WebSocket} from "ws";
 
 import {SocketManager} from "./sockets/socketManager";
+import * as intents from "./utils/intents";
 
 const client = new WebSocket("wss://eventsub-beta.wss.twitch.tv/ws");
 
 export declare interface twitchapi {
     on<U extends keyof events>(event: string, listener: events[U]): this;
+    on<U extends keyof events>(event: string, listener: events[U]): this;
     emit<U extends keyof events>(event: U, ...args: Parameters<events[U]>): boolean;
 }
+
+export const Intents= intents;
 
 export class twitchapi extends EventEmitter{
     public sessionId;
