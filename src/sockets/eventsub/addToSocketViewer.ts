@@ -10,7 +10,6 @@ export class AddToSocketViewer extends BaseSocket{
             console.log("add " + intent + "websocket")
             let version = 1;
             if (intent === Intents.Intents.ChannelFollow){
-                console.log("CHANNEL FOLLOW V2")
                 version = 2;
             }
             await axios.post(
