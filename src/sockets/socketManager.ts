@@ -12,6 +12,7 @@ export class SocketManager{
      * @param props: {intents: Array<any>, token: string, clientId: string, userId: string, sessionId: string}
      */
     constructor(props: {intents: Array<any>, token: string, clientId: string, userId: string, sessionId: string}) {
+
         this.sessionId = props.sessionId;
         this.token = props.token;
         this.clientId = props.clientId;

@@ -43,4 +43,7 @@ export declare interface events {
     "user.authorization.grant": any;
     "user.authorization.revoke": any;
     "user.update": any;
+
+    //add beta events
+    "channel.charity_campaign.donate": object
 }
