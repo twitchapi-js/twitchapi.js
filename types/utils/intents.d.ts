@@ -1,6 +1,5 @@
 /**
  * list of the custom intents for activate read specific channels
- * @see https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types for more info
  */
 export declare enum Intents {
     ChanneUpdate = "channel.update",

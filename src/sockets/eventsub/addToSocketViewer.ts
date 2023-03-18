@@ -8,7 +8,7 @@ export class AddToSocketViewer extends BaseSocket{
     async connectIntoSocket(intent: string){
         try {
             let version = 1;
-            if (intent === Intents.Intents.ChannelFollow){
+            if (intent === Intents.ChannelFollow){
                 version = 2;
             }
             await axios.post(

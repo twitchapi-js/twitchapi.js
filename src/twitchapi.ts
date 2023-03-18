@@ -1,12 +1,13 @@
 import {EventEmitter} from "node:events";
 import {events} from "./events";
 import {WebSocket} from "ws";
-
+export *  from "./utils/intents";
 import {SocketManager} from "./sockets/socketManager";
-import * as intents from "./utils/intents";
 import {BetaEvents} from "./betaEvents";
+import {Ready} from "./client/ready";
 
 const client = new WebSocket("wss://eventsub-beta.wss.twitch.tv/ws");
+
 
 export declare interface twitchapi {
     on<U extends keyof events>(event: string, listener: events[U]): this;
@@ -14,7 +15,7 @@ export declare interface twitchapi {
     emit<U extends keyof events>(event: U, ...args: Parameters<events[U]>): boolean;
 }
 
-export const Intents= intents;
+
 
 export class twitchapi extends EventEmitter{
     public sessionId;
@@ -43,6 +44,7 @@ export class twitchapi extends EventEmitter{
                 this.sessionId = parseData.payload.session.id;
                 let socketManager = new SocketManager({intents: this.intents, token: option.token, clientId: option.clientId, userId: option.userId, sessionId: this.sessionId})
                 await socketManager.connectToEvents();
+                this.emit("ready", Ready)
             }else if (parseData.metadata.message_type === "notification") {
                 this.emit(parseData.metadata.subscription_type, parseData);
             }
