@@ -4,12 +4,13 @@ import {WebSocket} from "ws";
 
 import {SocketManager} from "./sockets/socketManager";
 import * as intents from "./utils/intents";
+import {BetaEvents} from "./betaEvents";
 
 const client = new WebSocket("wss://eventsub-beta.wss.twitch.tv/ws");
 
 export declare interface twitchapi {
     on<U extends keyof events>(event: string, listener: events[U]): this;
-    on<U extends keyof events>(event: string, listener: events[U]): this;
+    on<U extends keyof BetaEvents>(event: string, listener: BetaEvents[U]): this;
     emit<U extends keyof events>(event: U, ...args: Parameters<events[U]>): boolean;
 }
 
@@ -41,10 +42,8 @@ export class twitchapi extends EventEmitter{
             if (parseData.metadata.message_type === "session_welcome") {
                 this.sessionId = parseData.payload.session.id;
                 let socketManager = new SocketManager({intents: this.intents, token: option.token, clientId: option.clientId, userId: option.userId, sessionId: this.sessionId})
-                socketManager.connectToEvents().then(() => {
-                    console.log("Connect into server")
-                });
-            }else {
+                await socketManager.connectToEvents();
+            }else if (parseData.metadata.message_type === "notification") {
                 this.emit(parseData.metadata.subscription_type, parseData);
             }
         })

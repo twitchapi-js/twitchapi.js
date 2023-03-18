@@ -2,7 +2,6 @@
   "name": "twitchapi.js",
   "version": "2.0.4",
   "devDependencies": {
-    "typedoc": "^0.23.23",
     "typescript": "^5.0.2"
   },
   "repository": {
@@ -14,7 +13,6 @@
     "axios": "^1.2.2",
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.20",
-    "socket.io": "^4.5.4",
     "ws": "^8.11.0"
   },
   "scripts": {

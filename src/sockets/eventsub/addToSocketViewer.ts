@@ -7,7 +7,6 @@ export class AddToSocketViewer extends BaseSocket{
 
     async connectIntoSocket(intent: string){
         try {
-            console.log("add " + intent + "websocket")
             let version = 1;
             if (intent === Intents.Intents.ChannelFollow){
                 version = 2;
